@@ -250,6 +250,7 @@ fn parse_text(text: &str, leading_zero_as_string: bool, json_type: &JsonType) ->
 fn convert_text(
     el: &roxmltree::Node,
     config: &Config,
+    path: &String,
     text: &str,
     json_type_value: JsonType,
 ) -> Option<Value> {
@@ -292,7 +293,7 @@ fn convert_no_text(
     el: &roxmltree::Node,
     config: &Config,
     path: &String,
-    json_type_value: JsonType,
+    _json_type_value: JsonType,
 ) -> Option<Value> {
     // this element has no text, but may have other child nodes
     let mut data = Map::new();
@@ -319,7 +320,6 @@ fn convert_no_text(
         match convert_node(&child, config, &path) {
             Some(val) => {
                 let name = &child.tag_name().name().to_string();
-                println!("{:?}", name);
                 if name == "" {
                     ()
                 } else {
@@ -384,12 +384,12 @@ fn convert_node(el: &roxmltree::Node, config: &Config, path: &String) -> Option<
             text = text.trim();
 
             if text != "" {
-                convert_text(el, config, text, json_type_value)
+                convert_text(el, config, &path, text, json_type_value)
             } else {
-                convert_no_text(el, config, path, json_type_value)
+                convert_no_text(el, config, &path, json_type_value)
             }
         }
-        None => convert_no_text(el, config, path, json_type_value),
+        None => convert_no_text(el, config, &path, json_type_value),
     }
 }
 

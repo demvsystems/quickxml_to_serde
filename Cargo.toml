@@ -6,6 +6,9 @@ description = "Convert between XML JSON using quickxml and serde"
 repository = "https://github.com/AlecTroemel/quickxml_to_serde"
 keywords = ["json", "xml", "xml2json", "xml_to_json"]
 license = "MIT"
+edition = "2021"
+resolver = "2"
+
 
 [dependencies]
 serde = "1.0"
