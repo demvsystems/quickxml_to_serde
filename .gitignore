@@ -1,11 +1,13 @@
-/target
-**/*.rs.bk
-
+# Rust build artifacts
 /target
 **/*.rs.bk
 Cargo.lock
 
+# General temporary files
 .#*w
 *~
 *#
 .#*
+
+# Editor files
+.idea
